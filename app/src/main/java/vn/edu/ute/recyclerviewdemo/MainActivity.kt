@@ -1,20 +1,29 @@
 package vn.edu.ute.recyclerviewdemo
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import vn.edu.ute.recyclerviewdemo.adapter.StudentAdapter
+import vn.edu.ute.recyclerviewdemo.model.Student
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        val rvStudents = findViewById<RecyclerView>(R.id.rvStudents)
+
+        val dsSinhVien = listOf(
+            Student("2415053122316", "Lê Văn Hải", "Công nghệ thông tin"),
+            Student("2415053122301", "Nguyễn Văn An", "Công nghệ thông tin"),
+            Student("2415053122302", "Trần Thị Bình", "Kỹ thuật phần mềm"),
+            Student("2415053122303", "Phạm Quốc Dũng", "Mạng máy tính"),
+            Student("2415053122304", "Hoàng Minh Khoa", "An toàn thông tin"),
+            Student("2415053122305", "Đặng Thu Hà", "Hệ thống thông tin")
+        )
+
+        rvStudents.layoutManager = LinearLayoutManager(this)
+        rvStudents.adapter = StudentAdapter(dsSinhVien)
     }
 }
